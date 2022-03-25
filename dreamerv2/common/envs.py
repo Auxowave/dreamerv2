@@ -426,7 +426,10 @@ class OneHotAction:
     reference[index] = 1
     if not np.allclose(reference, action[self._key]):
       raise ValueError(f'Invalid one-hot action:\n{action}')
-    return self._env.step({**action, self._key: index})
+    #print(action)
+    #print({**action, self._key: index})
+    # return self._env.step({**action, self._key: index})
+    return self._env.step(action)
 
   def reset(self):
     return self._env.reset()
@@ -469,6 +472,7 @@ class ResizeImage:
     return spaces
 
   def step(self, action):
+    #print("step-envs", action)
     obs = self._env.step(action)
     for key in self._keys:
       obs[key] = self._resize(obs[key])

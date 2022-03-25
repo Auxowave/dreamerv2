@@ -44,6 +44,9 @@ class Driver:
           {k: np.array(actions[k][i]) for k in actions}
           for i in range(len(self._envs))]
       assert len(actions) == len(self._envs)
+      #for e, a in zip(self._envs, actions):
+      #  print(e)
+      #  print(a)
       obs = [e.step(a) for e, a in zip(self._envs, actions)]
       obs = [ob() if callable(ob) else ob for ob in obs]
       for i, (act, ob) in enumerate(zip(actions, obs)):
